@@ -1,72 +1,75 @@
  
-            const searchSong = document.getElementById('song-name');
-
-           document.getElementById('search').addEventListener('click', function(){
-            const inputSong = document.getElementById('song-name').value;
-            fetch(`https://api.lyrics.ovh/suggest/`+searchSong.value)
-            .then(res => res.json())
-            .then(data => {
-            // first song 
-                const getSong = data['data']['0']['artist'].name;
-                 document.getElementById('singer').innerText = getSong;
-                 const songName = data['data']['0']['title']
-                document.getElementById('artist').innerText = songName;
-             // 2nd song
-                const getSong2 = data['data']['1']['artist'].name;
-                document.getElementById('singer1').innerText = getSong2;
-                const songName2 = data['data']['1']['title']
-                document.getElementById('artist1').innerText = songName2;
-             //3rd song   
-                const getSong3 = data['data']['2']['artist'].name;
-                document.getElementById('singer2').innerText = getSong3;
-                const songName3 = data['data']['2']['title']
-                document.getElementById('artist2').innerText = songName3;
-             //4th song
-                const getSong4 = data['data']['3']['artist'].name;
-                document.getElementById('singer3').innerText = getSong4;
-                const songName4 = data['data']['3']['title']
-                document.getElementById('artist3').innerText = songName4;
-             //5th song
-                const getSong5 = data['data']['4']['artist'].name;
-                document.getElementById('singer4').innerText = getSong5;
-                const songName5 = data['data']['4']['title']
-                document.getElementById('artist4').innerText = songName5;
-             //6th song
-                const getSong6 = data['data']['5']['artist'].name;
-                document.getElementById('singer5').innerText = getSong6;
-                const songName6 = data['data']['5']['title']
-                document.getElementById('artist5').innerText = songName6;
-             //7th song
-                const getSong7 = data['data']['6']['artist'].name;
-                document.getElementById('singer6').innerText = getSong7;
-                const songName7 = data['data']['6']['title']
-                document.getElementById('artist6').innerText = songName7;
-             //8th song
-                const getSong8 = data['data']['7']['artist'].name;
-                document.getElementById('singer7').innerText = getSong8;
-                const songName8 = data['data']['7']['title']
-                document.getElementById('artist7').innerText = songName8;
-             //9th song
-                const getSong9 = data['data']['8']['artist'].name;
-                document.getElementById('singer8').innerText = getSong9;
-                const songName9 = data['data']['8']['title']
-                document.getElementById('artist8').innerText = songName9;
-             //10 song
-                const getSong10 = data['data']['9']['artist'].name;
-                document.getElementById('singer9').innerText = getSong10;
-                const songName10 = data['data']['9']['title']
-                document.getElementById('artist9').innerText = songName10;
-
-
-                fetch('https://api.lyrics.ovh/v1/'+getSong+'/'+songName)
-                .then (res => res.json())
-                .then (data => {
-                    const songLyrics = data.lyrics 
-                    document.getElementById('show').innerText = songLyrics;
-
-                })
+            const input = document.getElementById('input');
+            const searchBtn = document.querySelector('.search-btn');
+            const albumList = document.querySelector('.album-list')
+            const albumNameList = albumList.querySelectorAll('strong');
+            const artistName = albumList.querySelectorAll('span');
+            const getLyricsBtnList1 = albumList.querySelectorAll('button');
+            const lyricsEl = document.querySelector('.lyric');
+            const lyricsEl2 = document.querySelector('.lyric2');
+            console.log(getLyricsBtnList1)
+            document.addEventListener('keydown', event => {
+                if (event.keyCode == 13) {
+                    searchBtn.click();
+                }
             })
-               
-           })
-       
-  
+            searchBtn.addEventListener('click', () => {
+                fetch(`https://api.lyrics.ovh/suggest/${input.value}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        for (let i = 0; i < albumNameList.length; i++) {
+                            let album = data.data[i].album.title;
+                            let artist = data.data[i].artist.name;
+            
+                            albumNameList[i].innerText = album;
+                            artistName[i].innerText = artist;
+                        }
+            
+                        getLyricsBtnList1.forEach((element, index) => {
+                            element.addEventListener('click', () => {
+                                let artist = data.data[index].artist.name;
+                                let songTitle = data.data[index].title;
+                                lyricsShowFunc(artist, songTitle, index)
+                                
+                                if(index  <= 5) window.scrollBy(0, 700);
+                                else if(5 < index && index < 8 ) window.scrollBy(0, 400);
+                                else if(index > 7)window.scroll(0, 200)
+                            })
+                        });
+            
+                        // //  Extra works
+                        // const searchResult = document.querySelector('.search-result');
+                        // const lyricsName = searchResult.querySelectorAll('.lyrics-name');
+                        // const artistEl = searchResult.querySelectorAll('span');
+                        // const getLyricsBtnList2 = searchResult.querySelectorAll('button')
+                    
+                        // for (let i = 0; i < 4; i++) {
+                        //     let album = data.data[i].album.title;
+                        //     let artistName = data.data[i].artist.name;
+                        //     lyricsName[i].innerText = album;
+                        //     artistEl[i].innerText = artistName;
+                        // }
+                        // getLyricsBtnList2.forEach((element, index) => {
+                        //     element.addEventListener('click', () => {
+                        //         let artist = data.data[index].artist.name;
+                        //         let songTitle = data.data[index].title;
+                        //         lyricsShowFunc(artist, songTitle, index)
+                        //         // window.scrollBy(0, 700);
+                        //     })
+                        // })
+                    })
+            })
+              const titleEl1 = document.getElementById('title1');
+              const titleEl2= document.getElementById('title2');
+            
+            const lyricsShowFunc = (artist, songTitle, index) => {
+                fetch(`https://api.lyrics.ovh/v1/${artist}/${songTitle}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        lyricsEl.innerHTML = data.lyrics;
+                        lyricsEl2.innerHTML = data.lyrics;
+                        titleEl1.innerText = artist + " - " + songTitle;
+                        titleEl2.innerText = artist + " - " + songTitle; 
+                    })
+            }
