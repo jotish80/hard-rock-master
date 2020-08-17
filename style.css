@@ -35,7 +35,12 @@ body{
     height: 100%;
 }
 .single-result{
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(49, 161, 15, 0.198);
     border-radius: 15px;
+    transition: 1s;
+}
+.single-result:hover{
+    transform: scale(1.1);
 }
 
+ 
