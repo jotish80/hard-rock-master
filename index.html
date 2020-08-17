@@ -53,23 +53,23 @@
             <!-- === Simple results === -->
             <div class="d-flex justify-content-center">
                 <div class="">
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
-                    <p class="author lead"><strong>Purple Noon</strong> Album by <span>Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
+                    <p class="author lead"><strong id="artist">Purple Noon</strong> Album by <span id="singer" >Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
+                    <p class="author lead"><strong id="artist1">Purple Noon</strong> Album by <span id="singer1">Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
+                    <p class="author lead"><strong id="artist2">Purple Noon</strong> Album by <span id="singer2">Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
+                    <p class="author lead"><strong id="artist3">Purple Noon</strong> Album by <span id="singer3">Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
+                    <p class="author lead"><strong id="artist4">Purple Noon</strong> Album by <span id="singer4">Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
+                    <p class="author lead"><strong id="artist5">Purple Noon</strong> Album by <span id="singer5">Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
+                    <p class="author lead"><strong id="artist6">Purple Noon</strong> Album by <span id="singer6">Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
+                    <p class="author lead"><strong id="artist7">Purple Noon</strong> Album by <span id="singer7">Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
+                    <p class="author lead"><strong id="artist8">Purple Noon</strong> Album by <span id="singer8">Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
+                    <p class="author lead"><strong id="artist9">Purple Noon</strong> Album by <span id="singer9">Washed Out</span> <button class="btn btn-success">Get Lyrics</button></p>
                 </div>
             </div>
             <!-- Single Lyrics -->
             <div class="single-lyrics text-center">
                 <button class="btn go-back">&lsaquo;</button>
-                <h2 class="text-success mb-4">Pentatonix - Na Na Na</h2>
-                <pre class="lyric text-white">
+                <h2 id="songLine" class="text-success mb-4">Pentatonix - Na Na Na</h2>
+                <pre id="show" class="lyric text-white">
     Wont go whistling like the wind blows,
     Looking out my window,
     Just to see the shine
@@ -220,26 +220,15 @@
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="song.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <!-- Custom Script Here -->
-      <script>
-            
-           document.getElementById('search').addEventListener('click', function(){
-            const inputSong = document.getElementById('song-name').value;
-            fetch(`https://api.lyrics.ovh/suggest/${inputSong}`)
-            .then(res => res.json())
-            .then(data => {
-                const songName = data.album.artist.title;
-                console.log(songName);
-            })
-               
-           })
-      </script>
+ 
+      
 
-    <!-- https://api.lyrics.ovh/suggest/summer -->
+   
 
 </body>
 
